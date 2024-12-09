@@ -37,9 +37,9 @@ function display_current(a, t) {
               <div class="card-body p-5">
                 <h2 class="text-white " style="font-size: 20px;">${a.name}</h2>
                   <h1 class="card-title fw-bolder text-info " style="font-size: 75px;">${t.temp_c} °C</h1>
-                  <img src="${t.condition.icon}" class="ms-auto " width="80px" height="80px" alt="">
+                  <img src="${t.condition.icon}" class="ms-auto " width="70px" height="70px" alt="">
                 <p class="card-text text-info py-3">${t.condition.text}</p>
-                <div class="">
+                <div class="py-3">
                   <i class="text-white"><img src="./image/icon-umberella@2x.png" width="20px" alt=""><span class="p-1">${t.humidity} </span>% </i>
                   <i class="ms-3 text-white"><img src="./image/icon-wind@2x.png" width="20px" alt=""><span class="p-1">${t.wind_kph}</span>km/h
                   </i>
