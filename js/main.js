@@ -35,7 +35,7 @@ function display_current(a, t) {
                 <p>${e.getDate() + Months[e.getMonth()]}</p>
               </div>
               <div class="card-body p-5">
-                <h2 class="text-white " style="font-size: 30px;">${a.name}</h2>
+                <h2 class="text-white " style="font-size: 20px;">${a.name}</h2>
                   <h1 class="card-title fw-bolder text-info " style="font-size: 75px;">${t.temp_c} °C</h1>
                   <img src="${t.condition.icon}" class="ms-auto " width="80px" height="80px" alt="">
                 <p class="card-text text-info py-3">${t.condition.text}</p>
