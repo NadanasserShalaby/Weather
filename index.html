@@ -1,38 +1,97 @@
-<!DOCTYPE html>                                           
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="css/all.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
-<body >
 
-
-
-  <section class="bg-color">
-    <div class="container d-flex align-items-center justify-content-center vh-100 ">
-        <div class="content rounded-2   w-75 text-center py-5 shadow-box">
-          <h2 class="text-info">Smart Login System</h2>
-            <div class="w-75 text-center m-auto">
-                <div class="mb-3 ">
-                  <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter your Email">
-                </div>
-                <div class="mb-3">
-                  <input type="password" class="form-control" id="loginPassword" placeholder="Enter your Password">
-                </div>
-                <p id="correct" class="py-2"></p>
-                <button type="submit" class="btn btn-outline-info w-100 my-3" onclick="login ()">Login</button>
-              </div>
-              <p class="my-3 text-white">Don't have an account? <a href="signUp.html">Sign Up</a></p>
+<body>
+  <nav class="navbar navbar-expand-lg bg-main">
+    <div class="container">
+      <div class="logo d-flex justify-content-between p-2 align-items-center">
+        <img src="./image/logo@2x.png" class="p-2" style="width: 80px;height: 80px;" alt="">
+        <div class="d-flex flex-column p-2 text-center">
+          <a class="navbar-brand text-white" href="#">Weather</a>
+          <p class="text-white">tagline goes here</p>
         </div>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 p-4 ">
+          <li class="nav-item  m-3">
+            <a class="text-white  btn btn-outline-info rounded-5 px-5" href="#">Home</a>
+          </li>
+          <li class="nav-item  m-3">
+            <a class="nav-link  text-white" href="#">News</a>
+          </li>
+          <li class="nav-item  m-3">
+            <a class="nav-link text-white" href="#">Live cameras</a>
+          </li>
+          <li class="nav-item  m-3">
+            <a class="nav-link text-white" href="#">Photos</a>
+          </li>
+          <li class="nav-item  m-3">
+            <a class="nav-link text-white" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
     </div>
-</section>
+  </nav>
 
+  <header class="bg-img">
+    <div class="container">
+      <div class="sit-search py-5">
+        <form action="" class="subscribe-form ">
+          <input type="text" class="rounded-5 p-3" id="search"  placeholder="Find your location.....">
+          <input type="submit" value="Find" class="rounded-5 px-5 btn btn-info text-white ">
+        </form>
+      </div>
 
+        <div class="forcat-table">
+          <div class="container py-5">
+              <div class="forc-container d-flex">
+                  <div class="row-1" style="width: 33.33%;" id = "row-1"></div>
+                  <div class="row-2" style="width: 33.33%;" id = "row-2"></div>
+                  <div class="row-3" style="width: 33.33%;" id = "row-3"></div>
+              </div>
+          </div>
+        </div>
+        
+    </div>
+  </header>
+  <footer class="site-footer">
+    <div class="container ">
+      <div class="row m-0">
+        <div class="col-md-8 ">
+          <!-- <div class="contant bg-black d-flex justify-content-between p-3"> -->
+          <div class="site-footer">
+            <form action="" class="subscribe-form">
+              <input type="text" name="" id="" class="rounded-5 p-3" placeholder="Enter your email to subscribe...">
+              <input type="submit" value="Subscribe" class="rounded-5 p-3 btn btn-info text-white ">
+            </form>
+          </div>
+        </div>
+        <div class="col-md-3 offset-sm-1 d-flex justify-content-center align-items-center p-0 ">
+          <div class="social-links text-center d-flex align-items-center justify-content-center  m-0">
+            <a href="#"><i class="fa fa-brands fa-facebook p-2"></i></a>
+            <a href="#"><i class="fa fa-brands fa-twitter p-2"></i></a>
+            <a href="#"><i class="fa fa-brands fa-google p-2"></i></a>
+            <a href="#"><i class="fa fa-brands fa-pinterest p-2"></i></a>
+          </div>
+        </div>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+      </div>
+      <p class="text-white p-3">Copyright 2014 Company name. Designed by Themezy. All rights reserved</p>
+    </div>
+  </footer>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>

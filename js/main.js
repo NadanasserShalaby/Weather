@@ -1,199 +1,88 @@
-// sign
-var signName = document.getElementById("Name");
-var signEmail = document.getElementById("Email");
-var signPassword = document.getElementById("Password");
-// login
-var loginEmail = document.getElementById("loginEmail");
-var loginPassword = document.getElementById("loginPassword");
-//  url
-var path = location.pathname.split('/');
-var pathUrl = '';
-for (var i = 0; i < path.length - 1; i++) {
-    pathUrl += '/' + path[i];
-}
-console.log(pathUrl);
+// ----------------------------------------------
 
-// to say welcome in home page
-var username = localStorage.getItem('userName')
-if (username) {
-    document.getElementById('userName').innerHTML = username
-}
-var signContainer = [];
+var Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-if (localStorage.getItem("user") !== null) {
-    signContainer = JSON.parse(localStorage.getItem("user"));
+
+document.getElementById("search").addEventListener("keyup", function(a) {
+    search(a.target.value)
+})
+async function search(a) {
+    var dataApi = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=7060c33e4f6943a4a8271514240912&q=${a}&days=3`);
+    if (dataApi.ok && 400 != dataApi.status) {  // bad request
+    var jsonApi = await dataApi.json();
+    display_current(jsonApi.location, jsonApi.current);
+    displayNext(jsonApi.forecast.forecastday);
+}
 }
 
-// sign up
-function signUp() {
+search('alex');
 
-    // check empety
-    if (isEmpty() == false) {
+function display_current(a, t) {
+    var winDir ;
+    if(t.wind_dir == "S") winDir="South";
+    else if (t.wind_dir == "N") winDir = "North";
+    else if (t.wind_dir == "E") winDir = "East";
+    else if (t.wind_dir == "W") winDir = "West";
+    else winDir = t.wind_dir;
 
-        document.getElementById("exist").innerHTML = '<span class="text-danger ">All inputs is required</span>';
-        clearFormSign();
-        return false;
-    }
-    // check Email
-    if (isEmailExist() == false) {
-        document.getElementById("exist").innerHTML = '<span class="text-danger ">Email Already Exists</span>';
-        // clearFormSign() ;
-        return false;
-    }
-    // add new user
-    else {
+    var e = new Date(t.last_updated.replace(" ", "T"));
 
-        console.log(" check valid");
-        
-        var same_name_entered = false;
-        // Perform validation checks
-        demo(signName.value); // Validate the Website Name
-        demo2(signEmail.value); // Validate the Website URL
-        demo3(signPassword.value); // Validate the Website URL
-        // Check if both fields are valid before proceeding
-        if (signName.classList.contains("is-valid") && signEmail.classList.contains("is-valid") && signPassword.classList.contains("is-valid")) {
-            console.log(" valid");
-            
-            var signUp = {
-                name: signName.value,
-                email: signEmail.value,
-                password: signPassword.value
-            }
-            for (var iterate = 0; iterate < signContainer.length; iterate++) {
-                if (signContainer[iterate].name == signUp.name) {
-                    same_name_entered = true;
-                }
-            }
-            if (same_name_entered == true) {
-                alert("You Enter the same Name");
-            }
-            else {
-                console.log(signContainer.push(signUp));
-                console.log(signContainer.length);
+    var cartona = `
+            <div class="card  ">
+              <div class="card-header bg-main d-flex  justify-content-between text-center align-items-center">
+                <p>${Days[t.is_day]}</p>
+                <p>${e.getDate() + Months[e.getMonth()]}</p>
+              </div>
+              <div class="card-body p-5">
+                <h2 class="text-white " style="font-size: 30px;">${a.name}</h2>
+                  <h1 class="card-title fw-bolder text-info " style="font-size: 75px;">${t.temp_c} °C</h1>
+                  <img src="${t.condition.icon}" class="ms-auto " width="80px" height="80px" alt="">
+                <p class="card-text text-info py-3">${t.condition.text}</p>
+                <div class="">
+                  <i class="text-white"><img src="./image/icon-umberella@2x.png" width="30px" alt=""><span class="p-1">${t.humidity} </span>% </i>
+                  <i class="ms-3 text-white"><img src="./image/icon-wind@2x.png" width="30px" alt=""><span class="p-1">${t.wind_kph}</span>km/h
+                  </i>
+                  <i class="ms-3 text-white"><img src="./image/icon-compass@2x.png" width="30px" alt=""><span class="p-1">${winDir}</span>
+                  </i>
+                </div>
+              </div>
+            </div>
+    `;
 
-                localStorage.setItem("user", JSON.stringify(signContainer));
-                document.getElementById("exist").innerHTML = '<span class="text-success m-3">Success</span>';
-                clearFormSign();
-            }
-        }
-        else {
-            alert("Site Name or Url is not valid, \n\tPlease follow the rules below: \n\t\tSite name must contain at least 4 characters.\n\t\tSite URL must be a valid one.");
-        }
 
-    }
+    document.getElementById('row-1').innerHTML = cartona;
+
 }
 
-// check empty sign
-function isEmpty() {
-    if (signName.value == "" || signEmail.value == "" || signPassword.value == "") {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
+function displayNext (a){
+    var cartona = `
+            <div class="card  text-center">
+              <div class="card-header bg-main text-white text-center">
+                <p>${Days[new Date(a[1].date.replace(" ", "T")).getDay()]}</p>
+              </div>
+              <div class="card-body p-5">
+                <img src="${a[1].day.condition.icon}" class="py-3" alt="">
+                <h1 class="card-title fw-bolder text-info py-5">${a[1].day.maxtemp_c} °C</h1>
+                <p class="py-2">${a[1].day.mintemp_c}°C</p>
+                <p class="card-text text-info">${a[1].day.condition.text}</p>
+              </div>
+            </div>`;
 
-// check exist mail 
-function isEmailExist() {
-    for (var i = 0; i < signContainer.length; i++) {
-        if (signContainer[i].email == signEmail.value) {
-            return false;
-        }
-    }
-}
-
-// clear
-function clearFormSign() {
-    signName.value = null;
-    signEmail.value = null;
-    signPassword.value = null;
-}
-function clearFormLogin() {
-    loginEmail.value = null;
-    loginPassword.value = null;
-}
-
-// check empty login
-function isEmptyLogin() {
-    if (loginEmail.value == "" || loginPassword.value == "") {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-// login
-function login() {
-    if (isEmptyLogin() == false) {
-        document.getElementById("correct").innerHTML = '<span class="text-danger">All inputs is required</span>';
-        clearFormLogin();
-        return false;
-    }
-    console.log("Go");
-    console.log(signContainer.length);
-
-    var logPass = loginPassword.value;
-    var logEmail = loginEmail.value;
-    if (signContainer.length == 0) {
-        document.getElementById("correct").innerHTML = `<span class="text-danger">Dont Have an account ,please Sign up</span>`;
-
-    }
-    for (var i = 0; i < signContainer.length; i++) {
-        console.log("Entered");
-        if (signContainer[i].email == logEmail && signContainer[i].password == logPass) {
-            console.log("Entered if");
-
-            localStorage.setItem("userName", signContainer[i].name);
-            window.location.href = 'login.html';
-        }
-        else {
-            console.log("incrroct");
-
-            document.getElementById("correct").innerHTML = `<span class="text-danger">Incorrect Email or Password</span>`;
-        }
-    }
-}
-
-function logout() {
-    localStorage.removeItem('user')
-    localStorage.removeItem('userName')
-}
-
-// validation
-// name
-var pNameRegex = /^[a-zA-Z]{4,8}/;
-function demo(pvalue) {
-    if (pNameRegex.test(pvalue)) {
-        signName.classList.add("is-valid");
-        signName.classList.remove("is-invalid");
-    }
-    else {
-        signName.classList.add("is-invalid");
-        signName.classList.remove("is-valid");
-    }
-}
-// email
-var pNameRegex_2 = /.+[@].+[.].+/;
-function demo2(pvalue) {
-    if (pNameRegex_2.test(pvalue)) {
-        signEmail.classList.add("is-valid");
-        signEmail.classList.remove("is-invalid");
-    }
-    else {
-        signEmail.classList.add("is-invalid");
-        signEmail.classList.remove("is-valid");
-    }
-}
-// password
-var pNameRegex_3 = /[A-Za-z\d@$!%*?&]{8,}/;
-function demo3(pvalue) {
-    if (pNameRegex_3.test(pvalue)) {
-        signPassword.classList.add("is-valid");
-        signPassword.classList.remove("is-invalid");
-    }
-    else {
-        signPassword.classList.add("is-invalid");
-        signPassword.classList.remove("is-valid");
-    }
+        var cartona_ = `
+            <div class="card  text-center" width=>
+              <div class="card-header bg-main text-white text-center ">
+                <p>${Days[new Date(a[2].date.replace(" ", "T")).getDay()]}</p>
+              </div>
+              <div class="card-body p-5">
+                <img src="${a[2].day.condition.icon}" class="py-3" alt="">
+                <h1 class="card-title fw-bolder text-info py-5">${a[2].day.maxtemp_c} °C</h1>
+                <p class="py-2">${a[2].day.mintemp_c}°C</p>
+                <p class="card-text text-info">${a[2].day.condition.text}</p>
+              </div>
+            </div>
+          </div>
+    `;
+    document.getElementById('row-2').innerHTML = cartona;
+    document.getElementById('row-3').innerHTML = cartona_;
 }
