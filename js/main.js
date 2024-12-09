@@ -31,7 +31,7 @@ function display_current(a, t) {
     var cartona = `
             <div class="card  ">
               <div class="card-header bg-main d-flex  justify-content-between text-center align-items-center">
-                <p>${Days[t.is_day]}</p>
+                <p>${Days[e.getDay()]}</p>
                 <p>${e.getDate() + Months[e.getMonth()]}</p>
               </div>
               <div class="card-body p-5">
