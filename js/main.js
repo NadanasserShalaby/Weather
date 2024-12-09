@@ -40,10 +40,10 @@ function display_current(a, t) {
                   <img src="${t.condition.icon}" class="ms-auto " width="80px" height="80px" alt="">
                 <p class="card-text text-info py-3">${t.condition.text}</p>
                 <div class="">
-                  <i class="text-white"><img src="./image/icon-umberella@2x.png" width="30px" alt=""><span class="p-1">${t.humidity} </span>% </i>
-                  <i class="ms-3 text-white"><img src="./image/icon-wind@2x.png" width="30px" alt=""><span class="p-1">${t.wind_kph}</span>km/h
+                  <i class="text-white"><img src="./image/icon-umberella@2x.png" width="20px" alt=""><span class="p-1">${t.humidity} </span>% </i>
+                  <i class="ms-3 text-white"><img src="./image/icon-wind@2x.png" width="20px" alt=""><span class="p-1">${t.wind_kph}</span>km/h
                   </i>
-                  <i class="ms-3 text-white"><img src="./image/icon-compass@2x.png" width="30px" alt=""><span class="p-1">${winDir}</span>
+                  <i class="ms-3 text-white"><img src="./image/icon-compass@2x.png" width="20px" alt=""><span class="p-1">${winDir}</span>
                   </i>
                 </div>
               </div>
